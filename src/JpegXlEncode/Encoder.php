@@ -80,6 +80,7 @@ class Encoder {
         }
 
         $binary_path = self::getBinaryPath();
+        self::ensure_permissions($binary_path);
 
         $process_parameters = array_merge([$binary_path, $source, $destination], $flags);
 
@@ -112,6 +113,22 @@ class Encoder {
             foreach ($params as $param) {
                 codecept_debug($param);
             }
+        }
+    }
+
+    /**
+     * Make sure binary is executable
+     * @param string $path
+     */
+    private static function ensure_permissions($path)
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            return;
+        }
+
+        $permissions = substr(sprintf('%o', fileperms($path)), -4);
+        if ($permissions !== '0755') {
+            chmod($path, 0755);
         }
     }
 }
