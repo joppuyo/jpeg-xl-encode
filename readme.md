@@ -8,7 +8,7 @@ PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](ht
 
 * PHP 7.2.5 or later.
 * Linux, MacOS or Windows OS with x64 architecture.
-* Since the library executes the `cjxl` binary on the command line, the `proc_open` function needs to be enabled in the PHP installation (some hosts may disable this function for security reasons).
+* The `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
 
 ## Usage
 
