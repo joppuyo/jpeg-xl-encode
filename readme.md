@@ -48,4 +48,8 @@ Controls how much time is used for image encoding. Longer encoding time means sm
 
 `progressive`
 
-Enables progressive decoding for the image. If a web browser supports progressive rendering, the image will download perceptually faster. In VarDCT mode, progressive decoding does not affect the file size much. Enabling progressive decoding for Modular images is not recommended since it makes the resulting image file significantly larger. Maybe it should be enabled at a later date when there are browsers that support downloading only part of a modular progressive file. Default value is `true` for lossy and `false` for lossless.
+Enables progressive decoding for the image. If a web browser supports progressive rendering, the image will download perceptually faster.
+
+In VarDCT mode, progressive decoding does not affect the file size much.
+
+Enabling progressive decoding for Modular images is not recommended since it makes the resulting image file significantly larger. Maybe it should be enabled at a later date when there are browsers that support downloading only part of a modular progressive file. Default value is `true` for lossy and `false` for lossless.
