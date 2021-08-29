@@ -6,6 +6,9 @@ License: CC-BY-2.5
 Comment: https://commons.wikimedia.org/wiki/File:Broadway_tower_edit.jpg
 
 Files: tests/_data/jpeg-xl-logo.png
-Copyright: Public Domain
+Copyright: ™/®Joint Photographic Experts Group
 License: Public-Domain
-Comment: ™/®Joint Photographic Experts Group
+
+Files: bin/*
+Copyright: the JPEG XL Project Authors
+License: BSD-3-Clause
