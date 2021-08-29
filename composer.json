@@ -1,5 +1,7 @@
 {
     "name": "joppuyo/jpeg-xl-encode",
+    "description": "PHP library for encoding JPEG XL images.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Johannes Siipola",
