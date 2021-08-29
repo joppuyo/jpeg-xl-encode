@@ -1,5 +1,7 @@
 # JPEG XL Encode
 
+[![Test](https://github.com/joppuyo/jpeg-xl-encode/actions/workflows/test.yml/badge.svg)](https://github.com/joppuyo/jpeg-xl-encode/actions/workflows/test.yml)
+
 PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](https://github.com/rosell-dk/webp-convert).
 
 ## Requirements
