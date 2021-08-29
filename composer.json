@@ -1,0 +1,29 @@
+{
+    "name": "joppuyo/jpeg-xl-encode",
+    "authors": [
+        {
+            "name": "Johannes Siipola",
+            "email": "johannes@siipo.la"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Joppuyo\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.2.5",
+        "symfony/process": "^5.3",
+        "rosell-dk/image-mime-type-guesser": "^0.3.1"
+    },
+    "config": {
+        "platform": {
+            "php": "7.2.5"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.3"
+    }
+}
