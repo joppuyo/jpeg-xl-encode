@@ -1,0 +1,6 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: tests/_data/broadway-tower-edit.jpg
+Copyright: The author is Newton2 (cropped by Yummifruitbat)
+License: CC-BY-2.5
+Comment: https://commons.wikimedia.org/wiki/File:Broadway_tower_edit.jpg
