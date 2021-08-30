@@ -103,10 +103,10 @@ class Encoder {
             return __DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static';
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            return __DIR__ . '/../../bin/cjxl-v84f08079a0a5491ab81f3a7c6fb2ce8e3995d88d-linux-x64-static';
+            return __DIR__ . '/../../bin/cjxl-v0-5-0-linux-x64-static';
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            return __DIR__ . '/../../bin/cjxl-v84f08079a0a5491ab81f3a7c6fb2ce8e3995d88d-windows-x64-static.exe';
+            return __DIR__ . '/../../bin/cjxl-v0-5-0-windows-x64-static.exe';
         }
         throw new \Exception('Could not find binary suitable for the current operating system.');
     }
