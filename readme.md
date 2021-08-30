@@ -1,6 +1,8 @@
 # JPEG XL Encode
 
-[![Test](https://github.com/joppuyo/jpeg-xl-encode/actions/workflows/test.yml/badge.svg)](https://github.com/joppuyo/jpeg-xl-encode/actions/workflows/test.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/joppuyo/jpeg-xl-encode/Test?label=tests&logo=github)](https://github.com/joppuyo/jpeg-xl-encode/actions)
+[![Latest Stable Version](http://poser.pugx.org/joppuyo/jpeg-xl-encode/v)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
+[![License](http://poser.pugx.org/joppuyo/jpeg-xl-encode/license)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 
 PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](https://github.com/rosell-dk/webp-convert).
 
@@ -9,6 +11,12 @@ PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](ht
 * PHP 7.2.5 or later.
 * Linux, MacOS or Windows OS with x64 architecture.
 * The `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+
+## Installation
+
+```
+composer require joppuyo/jpeg-xl-encode
+```
 
 ## Usage
 
