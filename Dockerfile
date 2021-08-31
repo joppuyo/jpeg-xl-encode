@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2021 Johannes Siipola
+# SPDX-License-Identifier: CC0-1.0
+
 FROM php:7.4-cli
 
 RUN apt-get clean

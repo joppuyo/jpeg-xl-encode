@@ -97,7 +97,7 @@ class Encoder {
         self::debug('process error output', $process->getErrorOutput());
     }
 
-    private static function getBinaryPath()
+    public static function getBinaryPath()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
             return __DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static';
@@ -123,7 +123,7 @@ class Encoder {
      * Make sure binary is executable
      * @param string $path
      */
-    private static function ensure_permissions($path)
+    public static function ensure_permissions($path)
     {
         if (PHP_OS_FAMILY === 'Windows') {
             return;

@@ -1,5 +1,8 @@
 <?php
 
+// SPDX-FileCopyrightText: 2021 Johannes Siipola
+// SPDX-License-Identifier: MIT
+
 class ExampleTest extends \Codeception\Test\Unit
 {
     /**
@@ -9,7 +12,8 @@ class ExampleTest extends \Codeception\Test\Unit
     
     protected function _before()
     {
-        exec("chmod +x " . __DIR__ . "/../../bin/cjxl-v0-5-0-linux-x64-static");
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        \Joppuyo\JpegXlEncode\Encoder::ensure_permissions($binary);
     }
 
     protected function _after()
@@ -22,7 +26,9 @@ class ExampleTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        exec(__DIR__ . "/../../bin/cjxl-v0-5-0-linux-x64-static $source $comparison_image --quality 85 --effort 7 --progressive");
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
@@ -33,9 +39,15 @@ class ExampleTest extends \Codeception\Test\Unit
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testDefaultSettingsPng.jxl';
-        $result = __DIR__ . '/../_data/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
+
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
+
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
+
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
-        $this->assertEquals(md5_file($destination), md5_file($result));
+        $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
     public function test90SettingJpeg()
@@ -89,19 +101,32 @@ class ExampleTest extends \Codeception\Test\Unit
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testPngToLossy.jxl';
-        $result = __DIR__ . '/../_data/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+
+
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
+
         $options = [
             'encoding' => 'lossy',
         ];
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
-        $this->assertEquals(md5_file($destination), md5_file($result));
+        $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
     public function testCantSetQualityInModular()
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testDefaultSettingsPng.jxl';
-        $result = __DIR__ . '/../_data/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
+
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
+
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
 
         $options = [
             'encoding' => 'lossless',
@@ -109,6 +134,6 @@ class ExampleTest extends \Codeception\Test\Unit
         ];
 
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
-        $this->assertEquals(md5_file($destination), md5_file($result));
+        $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 }

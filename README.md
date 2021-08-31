@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2021 Johannes Siipola
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # JPEG XL Encode
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/joppuyo/jpeg-xl-encode/Test?label=tests&logo=github)](https://github.com/joppuyo/jpeg-xl-encode/actions)
@@ -24,12 +29,12 @@ composer require joppuyo/jpeg-xl-encode
 
 ```php
 $source = '/absolute/path/to/source.jpeg';
-$source = '/absolute/path/to/destination.jxl';
+$destination = '/absolute/path/to/destination.jxl';
 $options = [];
 try {
     \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
 } catch (Exception $exception) {
-    error_log('Whoops, something went wrong.')
+    error_log('Whoops, something went wrong.');
 }
 
 ```

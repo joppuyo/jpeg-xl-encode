@@ -6,9 +6,14 @@ License: CC-BY-2.5
 Comment: https://commons.wikimedia.org/wiki/File:Broadway_tower_edit.jpg
 
 Files: tests/_data/jpeg-xl-logo.png
-Copyright: ™/®Joint Photographic Experts Group
-License: Public-Domain
+Copyright: Masahito TAKIZAWA
+License: CC-BY-ND-4.0
+Comment: https://jpeg.org/downloads/JPEG_logos_package.zip
 
 Files: bin/*
 Copyright: the JPEG XL Project Authors
 License: BSD-3-Clause
+
+Files: composer.json composer.lock tests/_support/* tests/_data/text.txt
+Copyright: 2021 Johannes Siipola
+License: CC0-1.0
