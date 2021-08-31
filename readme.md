@@ -1,10 +1,11 @@
 # JPEG XL Encode
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/joppuyo/jpeg-xl-encode/Test?label=tests&logo=github)](https://github.com/joppuyo/jpeg-xl-encode/actions)
-[![Latest Stable Version](http://poser.pugx.org/joppuyo/jpeg-xl-encode/v)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
-[![License](http://poser.pugx.org/joppuyo/jpeg-xl-encode/license)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
+[![Packagist Version](https://img.shields.io/packagist/v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
+[![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 
-PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](https://github.com/rosell-dk/webp-convert).
+A PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](https://github.com/rosell-dk/webp-convert).
 
 ## Requirements
 
