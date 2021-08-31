@@ -57,7 +57,9 @@ class ExampleTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
 
-        exec(__DIR__ . "/../../bin/cjxl-v0-5-0-linux-x64-static $source $comparison_image --quality 90 --effort 7 --progressive");
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --quality 90 --effort 7 --progressive");
 
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, [
             'quality' => 90,
