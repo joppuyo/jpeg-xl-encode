@@ -9,8 +9,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Setup docker
         run: docker-compose up -d
-      - name: Install composer
-        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer"
       - name: Validate composer.json and composer.lock
         run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer validate"
       - name: Install dependencies
