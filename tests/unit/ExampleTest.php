@@ -9,6 +9,7 @@ class ExampleTest extends \Codeception\Test\Unit
     
     protected function _before()
     {
+        exec("chmod +x " . __DIR__ . "/../../bin/cjxl-v0-5-0-linux-x64-static");
     }
 
     protected function _after()
