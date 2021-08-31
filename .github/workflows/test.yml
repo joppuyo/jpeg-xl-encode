@@ -29,7 +29,11 @@ jobs:
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v1
-
+      - name: Setup PHP with pre-release PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: xdebug
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
