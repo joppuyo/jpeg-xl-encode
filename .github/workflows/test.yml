@@ -14,4 +14,4 @@ jobs:
       - name: Install dependencies
         run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer install --prefer-dist --no-progress --no-suggest"
       - name: Run test suite
-        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "./vendor/bin/codecept run --debug -vvv"
+        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml"
