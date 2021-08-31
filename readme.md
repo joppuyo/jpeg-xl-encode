@@ -6,7 +6,7 @@
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 
-A PHP library for encoding JPEG XL images. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
+A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
 ## Requirements
 
