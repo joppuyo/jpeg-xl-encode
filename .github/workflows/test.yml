@@ -78,7 +78,9 @@ jobs:
         - name: Install dependencies
           run: composer install --prefer-dist --no-progress --no-suggest
         - name: Run test suite
-          run: export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml
+          run: |
+            $env:XDEBUG_MODE = 'coverage'
+            ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml
         - uses: codecov/codecov-action@v2
           with:
             files: ./tests/_output/coverage.xml
