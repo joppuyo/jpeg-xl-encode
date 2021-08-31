@@ -19,7 +19,7 @@ class ExampleTest extends \Codeception\Test\Unit
     {
         $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
-        $result = __DIR__ . '/../_data/broadway-tower-edit-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($result));
     }
@@ -37,7 +37,7 @@ class ExampleTest extends \Codeception\Test\Unit
     {
         $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/test90SettingJpeg.jxl';
-        $result = __DIR__ . '/../_data/broadway-tower-edit-mac-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
+        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, [
             'quality' => 90,
         ]);
