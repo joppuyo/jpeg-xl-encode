@@ -42,7 +42,7 @@ class ExampleTest extends \Codeception\Test\Unit
         $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/test90SettingJpeg.jxl';
 
-        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
 
         exec(__DIR__ . "/../../bin/cjxl-v0-5-0-linux-x64-static $source $comparison_image --quality 90 --effort 7 --progressive");
 
