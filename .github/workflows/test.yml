@@ -17,5 +17,5 @@ jobs:
         run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml"
       - uses: codecov/codecov-action@v2
         with:
-          files: ./tests/output/coverage.xml
+          files: ./tests/_output/coverage.xml
           verbose: true
