@@ -6,7 +6,7 @@
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 
-A PHP library for encoding JPEG XL images. Very much inspired by [WebP Convert](https://github.com/rosell-dk/webp-convert).
+A PHP library for encoding JPEG XL images. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
 ## Requirements
 
@@ -58,10 +58,8 @@ Controls how much time is used for image encoding. Longer encoding time means sm
 
 `progressive`
 
-Enables progressive decoding for the image. If a web browser supports progressive rendering, the image will download perceptually faster.
+Enables progressive decoding for the image. If a web browser supports progressive rendering, the image will download perceptually faster. In VarDCT mode, progressive decoding does not affect the file size much.
 
-In VarDCT mode, progressive decoding does not affect the file size much.
-
-Enabling progressive decoding for Modular images is not recommended since it makes the resulting image file significantly larger. Maybe it should be enabled at a later date when there are browsers that support downloading only part of a modular progressive file.
+Enabling progressive decoding for Modular images is not recommended since it makes the resulting image file significantly larger. It could be enabled at a later date in a future version when there are browsers that support downloading only part of a modular progressive file.
 
 Default value is `true` for lossy and `false` for lossless.
