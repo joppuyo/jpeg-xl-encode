@@ -1,8 +1,7 @@
 version: "3.9"
 services:
   default:
-    image: php:7.4-cli
-    #image: ubuntu:20.04
+    build: .
     tty: true
     volumes:
       - .:/home/project
