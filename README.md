@@ -29,7 +29,7 @@ $options = [];
 try {
     \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
 } catch (Exception $exception) {
-    error_log('something went wrong')
+    error_log('Whoops, something went wrong.')
 }
 
 ```
