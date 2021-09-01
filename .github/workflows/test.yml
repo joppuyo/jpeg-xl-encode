@@ -6,33 +6,31 @@ name: Test
 on: [push]
 
 jobs:
-  build-linux:
+#  build-linux:
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - uses: actions/checkout@v1
+#      - run: docker-compose pull
+#      - uses: satackey/action-docker-layer-caching@v0.0.11
+#        continue-on-error: true
+#      - name: Setup docker
+#        run: docker-compose up --build -d
+#      - name: Validate composer.json and composer.lock
+#        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer validate"
+#      - name: Install dependencies
+#        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer install --prefer-dist --no-progress --no-suggest"
+#      - name: Run test suite
+#        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml"
+#      - uses: codecov/codecov-action@v2
+#        with:
+#          files: ./tests/_output/coverage.xml
+#          verbose: true
+  test-linux:
     runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v1
-      - run: docker-compose pull
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-      - name: Setup docker
-        run: docker-compose up --build -d
-      - name: Validate composer.json and composer.lock
-        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer validate"
-      - name: Install dependencies
-        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer install --prefer-dist --no-progress --no-suggest"
-      - name: Run test suite
-        run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml"
-      - uses: codecov/codecov-action@v2
-        with:
-          files: ./tests/_output/coverage.xml
-          verbose: true
-  build-mac:
-    runs-on: macos-11
     strategy:
       matrix:
         php_version: ['7.2', '7.3', '7.4', '8.0']
       fail-fast: false
-    env:
-      PHP_VERSION: ${{ matrix.php_version }}
     steps:
       - uses: actions/checkout@v1
       - name: Setup PHP
@@ -60,7 +58,40 @@ jobs:
         with:
           files: ./tests/_output/coverage.xml
           verbose: true
-  build-windows:
+  test-mac:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        php_version: ['7.2', '7.3', '7.4', '8.0']
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_version }}
+          extensions: xdebug
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run test suite
+        run: export XDEBUG_MODE=coverage; ./vendor/bin/codecept run --debug -vvv --coverage --coverage-xml
+      - uses: codecov/codecov-action@v2
+        with:
+          files: ./tests/_output/coverage.xml
+          verbose: true
+  test-windows:
       runs-on: windows-2019
       strategy:
         matrix:
