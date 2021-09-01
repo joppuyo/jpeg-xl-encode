@@ -1,6 +1,18 @@
 {
     "name": "joppuyo/jpeg-xl-encode",
-    "description": "PHP library for encoding JPEG XL images.",
+    "description": "A PHP library for encoding JPEG XL images. Very much inspired by WebP Convert.",
+    "keywords": [
+        "jpeg xl",
+        "jpeg-xl",
+        "jpegxl",
+        "jxl",
+        "image",
+        "images",
+        "encode",
+        "encoder",
+        "convert",
+        "converter"
+    ],
     "license": "MIT",
     "authors": [
         {
