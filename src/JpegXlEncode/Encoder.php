@@ -6,7 +6,9 @@
 namespace Joppuyo\JpegXlEncode;
 
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
+use Joppuyo\JpegXlEncode\Exception\InvalidArgumentException;
 use Symfony\Component\Process\Process;
+use Respect\Validation\Validator as v;
 
 class Encoder {
     /*
@@ -66,6 +68,8 @@ class Encoder {
         if ($options['encoding'] === 'lossless') {
             $options['quality'] = 100;
         }
+
+        self::validateOptions($options);
 
         $flags = [];
 
@@ -133,5 +137,20 @@ class Encoder {
         if ($permissions !== '0755') {
             chmod($path, 0755);
         }
+    }
+
+    private static function validateOptions(array $options)
+    {
+        $optionValidator = v::key('quality', v::intType()->between(1, 100))
+            ->key('effort', v::intType()->between(1, 9))
+            ->key('progressive', v::boolType())
+            ->key('encoding', v::stringType()->in(['lossless', 'lossy']));
+
+        try {
+            $optionValidator->check($options);
+        } catch (\Exception $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
+        }
+
     }
 }

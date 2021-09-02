@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021 Johannes Siipola
 // SPDX-License-Identifier: MIT
 
-class ExampleTest extends \Codeception\Test\Unit
+class EncodingTest extends \Codeception\Test\Unit
 {
     /**
      * @var \UnitTester
