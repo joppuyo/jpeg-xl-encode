@@ -65,6 +65,36 @@ class ValidationTest extends \Codeception\Test\Unit
         });
     }
 
+    public function testCantSetInvalidProgressive()
+    {
+        $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
+            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
+            $options = [
+                'progressive' => 'asdf',
+            ];
+            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+        });
+
+        $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
+            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
+            $options = [
+                'progressive' => 1,
+            ];
+            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+        });
+
+        $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
+            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
+            $options = [
+                'progressive' => 123,
+            ];
+            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+        });
+    }
+
     public function testCantSetInvalidEffort()
     {
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
