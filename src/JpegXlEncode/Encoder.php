@@ -72,8 +72,7 @@ class Encoder {
         self::validateOptions($options);
 
         $flags = [];
-
-        // TODO: validate is numeric and in range
+        
         if (!empty($options['quality']) && $options['encoding'] === 'lossy') {
             array_push($flags, '--quality', $options['quality']);
         }
