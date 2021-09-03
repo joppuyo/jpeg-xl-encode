@@ -14,4 +14,4 @@ extensions:
 coverage:
     enabled: true
     include:
-        - src/*
+        - src/**
