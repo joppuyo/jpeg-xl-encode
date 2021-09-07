@@ -30,7 +30,10 @@ composer require joppuyo/jpeg-xl-encode
 ```php
 $source = '/absolute/path/to/source.jpeg';
 $destination = '/absolute/path/to/destination.jxl';
-$options = [];
+$options = [
+    'encoding': 'lossy',
+    'quality': 80,
+];
 try {
     \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
 } catch (Exception $exception) {
