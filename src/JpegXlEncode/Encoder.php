@@ -6,11 +6,22 @@
 namespace Joppuyo\JpegXlEncode;
 
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
+use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
 use Joppuyo\JpegXlEncode\Exception\InvalidArgumentException;
 use Symfony\Component\Process\Process;
 use Respect\Validation\Validator as v;
 
 class Encoder {
+
+    /**
+     * @var bool false
+     */
+    private static $binaryValidated;
+
+    function __construct() {
+        self::$binaryValidated = false;
+    }
+
     /*
      * Convert a JPEG or PNG file to JPEG XL
      * @throws \Exception
@@ -86,6 +97,7 @@ class Encoder {
         }
 
         $binary_path = self::getBinaryPath();
+        self::validateBinary($binary_path);
         self::ensure_permissions($binary_path);
 
         $process_parameters = array_merge([$binary_path, $source, $destination], $flags);
@@ -151,5 +163,38 @@ class Encoder {
             throw new InvalidArgumentException($exception->getMessage());
         }
 
+    }
+
+    private static function validateBinary($binaryPath) {
+        if(self::$binaryValidated) {
+            // We validate binary only once per request to improve performance
+            self::debug('Binary already validated.');
+            return;
+        }
+        self::debug("Binary hasn't been validated yet. Validating...");
+        $comparisonHash = self::getHash();
+        $binaryHash = hash_file('sha256', $binaryPath);
+        if(!hash_equals($binaryHash, $comparisonHash)) {
+            self::debug('Hash does not match.');
+            throw new BinaryValidationException("Binary hash check failed.");
+        }
+        self::debug('Hash hash matches. Caching result of hash comparison to speed up further conversions.');
+        self::$binaryValidated = true;
+    }
+
+    private static function getHash()
+    {
+        if (PHP_OS_FAMILY === 'Darwin') {
+            // https://github.com/joppuyo/jpeg-xl-static-mac/releases/tag/v0.5.0-static-2
+            return '292927130b4a83c639df6ba573916c2205234ca85f68a1e1357201e5b33b1904';
+        }
+        if (PHP_OS_FAMILY === 'Linux') {
+            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static-2
+            return '50715d6af73bf177113ec4d46c35036b6295eb9a1be7e434c1a8ebbe5a1b8bda';
+        }
+        if (PHP_OS_FAMILY === 'Windows') {
+            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static
+            return 'b78ec5a1b48c48c1e0dbb47865f7af8057a92291c65581a59e744a3dac6d5490';
+        }
     }
 }
