@@ -14,13 +14,9 @@ use Respect\Validation\Validator as v;
 class Encoder {
 
     /**
-     * @var bool false
+     * @var bool
      */
-    private static $binaryValidated;
-
-    function __construct() {
-        self::$binaryValidated = false;
-    }
+    private static $binaryValidated = false;
 
     /*
      * Convert a JPEG or PNG file to JPEG XL
