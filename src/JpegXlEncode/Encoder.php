@@ -111,13 +111,13 @@ class Encoder {
     public static function getBinaryPath()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
-            return __DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static';
+            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static');
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            return __DIR__ . '/../../bin/cjxl-v0-5-0-linux-x64-static';
+            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-linux-x64-static');
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            return __DIR__ . '/../../bin/cjxl-v0-5-0-windows-x64-static.exe';
+            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-windows-x64-static.exe');
         }
         throw new \Exception('Could not find binary suitable for the current operating system.');
     }
