@@ -174,7 +174,7 @@ class Encoder {
             self::debug('Hash does not match.');
             throw new BinaryValidationException("Binary hash check failed.");
         }
-        self::debug('Hash hash matches. Caching result of hash comparison to speed up further conversions.');
+        self::debug('Binary hash matches. Caching result of hash comparison to speed up further conversions.');
         self::$binaryValidated = true;
     }
 
