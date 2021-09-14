@@ -10,6 +10,7 @@ SPDX-License-Identifier: CC0-1.0
 [![codecov](https://codecov.io/gh/joppuyo/jpeg-xl-encode/branch/main/graph/badge.svg?token=KBTKSRNEG6)](https://codecov.io/gh/joppuyo/jpeg-xl-encode)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
+[![REUSE status](https://api.reuse.software/badge/github.com/joppuyo/jpeg-xl-encode)](https://api.reuse.software/info/github.com/joppuyo/jpeg-xl-encode)
 
 A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
