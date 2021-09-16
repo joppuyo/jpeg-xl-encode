@@ -14,6 +14,6 @@ Files: bin/*
 Copyright: the JPEG XL Project Authors
 License: BSD-3-Clause
 
-Files: composer.json composer.lock tests/_support/* tests/_data/text.txt LICENSE.txt
+Files: composer.json composer.lock tests/_support/* tests/_data/text.txt
 Copyright: 2021 Johannes Siipola
 License: CC0-1.0
