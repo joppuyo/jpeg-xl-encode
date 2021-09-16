@@ -72,3 +72,7 @@ Enables progressive decoding for the image. If a web browser supports progressiv
 Enabling progressive decoding for Modular images is not recommended since it makes the resulting image file significantly larger. It could be enabled at a later date in a future version when there are browsers that support downloading only part of a modular progressive file.
 
 Default value is `true` for lossy and `false` for lossless.
+
+## License
+
+MIT. For detailed license information, see the individual file headers and [`.reuse/dep5`](.reuse/dep5).
