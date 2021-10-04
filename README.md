@@ -75,4 +75,6 @@ Default value is `true` for lossy and `false` for lossless.
 
 ## License
 
-MIT. For detailed license information, see the individual file headers and [`.reuse/dep5`](.reuse/dep5).
+MIT.
+
+For detailed license information, see the individual file headers and [`.reuse/dep5`](.reuse/dep5).
