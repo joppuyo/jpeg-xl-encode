@@ -13,7 +13,7 @@ class EncodingTest extends \Codeception\Test\Unit
     protected function _before()
     {
         $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
-        \Joppuyo\JpegXlEncode\Encoder::ensure_permissions($binary);
+        \Joppuyo\JpegXlEncode\Encoder::ensurePermissions($binary);
     }
 
     protected function _after()

@@ -105,7 +105,7 @@ class Encoder {
 
         $binary_path = self::getBinaryPath();
         self::validateBinary($binary_path);
-        self::ensure_permissions($binary_path);
+        self::ensurePermissions($binary_path);
 
         $process_parameters = array_merge([$binary_path, $source, $destination], $flags);
 
@@ -145,7 +145,7 @@ class Encoder {
      * Make sure binary is executable
      * @param string $path
      */
-    public static function ensure_permissions($path)
+    public static function ensurePermissions($path)
     {
         if (PHP_OS_FAMILY === 'Windows') {
             return;
