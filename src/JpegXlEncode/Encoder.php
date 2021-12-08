@@ -3,6 +3,9 @@
 // SPDX-FileCopyrightText: 2021 Johannes Siipola
 // SPDX-License-Identifier: MIT
 
+// SPDX-FileCopyrightText: Copyright (c) 2005-2008, eZ Systems A.S.
+// SPDX-License-Identifier: BSD-3-Clause
+
 namespace Joppuyo\JpegXlEncode;
 
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
@@ -38,6 +41,14 @@ class Encoder {
                 'progressive' => true,
             ]
         ];
+
+        if (!self::isAbsolutePath($source)) {
+            throw new InvalidArgumentException('Source path must be an absolute path.');
+        }
+
+        if (!self::isAbsolutePath($destination)) {
+            throw new InvalidArgumentException('Destination path must be an absolute path.');
+        }
 
         if (!file_exists($source)) {
             throw new \Exception('File does not exist.');
@@ -192,5 +203,39 @@ class Encoder {
             // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static
             return 'b78ec5a1b48c48c1e0dbb47865f7af8057a92291c65581a59e744a3dac6d5490';
         }
+    }
+
+    /**
+     * Returns whether the passed $path is an absolute path.
+     * Based on code from EzComponents, licensed under New BSD Licence
+     * Copyright (c) 2005-2008, eZ Systems A.S.
+     *
+     * @param string $path
+     * @return bool
+     */
+    private static function isAbsolutePath($path)
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            // Sanitize the paths to use the correct directory separator for the platform
+            $path = strtr($path, '\\/', '\\\\');
+
+            // Absolute paths with drive letter: X:\
+            if (preg_match('@^[A-Z]:\\\\@i', $path)) {
+                return true;
+            }
+
+            // Absolute paths with network paths: \\server\share\
+            if (preg_match('@^\\\\\\\\[A-Z]+\\\\[^\\\\]@i', $path)) {
+                return true;
+            }
+        } else {
+            // Sanitize the paths to use the correct directory separator for the platform
+            $path = strtr($path, '\\/', '//');
+
+            if ($path[0] == '/') {
+                return true;
+            }
+        }
+        return false;
     }
 }
