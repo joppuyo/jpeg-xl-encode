@@ -18,6 +18,25 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF ..
 RUN cmake --build . -- -j$(nproc)
 RUN cmake --install .
 
+# Imagick
+
+RUN apt-get update && apt-get install -y \
+	libxml2 \
+	libxml2-dev
+
+RUN mkdir -p /imagick-source \
+    && cd /imagick-source \
+    && curl "https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-17.tar.gz" -o imagemagick.tar.gz \
+    && tar -xof imagemagick.tar.gz -C /imagick-source --strip-components=1 \
+    && rm imagemagick.tar.gz* \
+    && ./configure --with-jxl=yes \
+    && make \
+    && make install \
+    && make clean
+
+RUN pecl install imagick && docker-php-ext-enable imagick
+
+# Vips
 RUN apt-get update && apt-get install -y \
 	build-essential \
 	wget \
