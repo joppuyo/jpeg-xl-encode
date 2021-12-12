@@ -39,7 +39,12 @@ class Encoder {
                 'encoding' => 'lossy', // VarDCT
                 'quality' => 85,
                 'progressive' => true,
-            ]
+            ],
+            '_methods' => [
+                'cjxlBinary',
+                'vipsExtension',
+                'imagickExtension',
+            ],
         ];
 
         if (!self::isAbsolutePath($source)) {
@@ -125,7 +130,7 @@ class Encoder {
             return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static');
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-linux-x64-static');
+            return realpath(__DIR__ . '/../../bin/cjxl-v0-6-1-linux-x64-static');
         }
         if (PHP_OS_FAMILY === 'Windows') {
             return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-windows-x64-static.exe');
@@ -143,9 +148,8 @@ class Encoder {
 
     /**
      * Make sure binary is executable
-     * @param string $path
      */
-    public static function ensurePermissions($path)
+    public static function ensurePermissions(string $path)
     {
         if (PHP_OS_FAMILY === 'Windows') {
             return;
@@ -162,7 +166,8 @@ class Encoder {
         $optionValidator = v::key('quality', v::intType()->between(1, 100))
             ->key('effort', v::intType()->between(1, 9))
             ->key('progressive', v::boolType())
-            ->key('encoding', v::stringType()->in(['lossless', 'lossy']));
+            ->key('encoding', v::stringType()->in(['lossless', 'lossy']))
+            ->key('_methods', v::arrayType()->each(v::stringVal()));
 
         try {
             $optionValidator->check($options);
@@ -196,8 +201,8 @@ class Encoder {
             return '292927130b4a83c639df6ba573916c2205234ca85f68a1e1357201e5b33b1904';
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static-2
-            return '50715d6af73bf177113ec4d46c35036b6295eb9a1be7e434c1a8ebbe5a1b8bda';
+            // https://github.com/libjxl/libjxl/releases/tag/v0.6.1
+            return '07bfb1902ef8eab8b5266ad884c2638fd17552a7e053ea0d65aa606cf7fcce48';
         }
         if (PHP_OS_FAMILY === 'Windows') {
             // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static
@@ -213,9 +218,9 @@ class Encoder {
      * @param string $path
      * @return bool
      */
-    private static function isAbsolutePath($path)
+    public static function isAbsolutePath($path, $os = PHP_OS_FAMILY)
     {
-        if (PHP_OS_FAMILY === 'Windows') {
+        if ($os === 'Windows') {
             // Sanitize the paths to use the correct directory separator for the platform
             $path = strtr($path, '\\/', '\\\\');
 

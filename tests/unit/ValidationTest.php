@@ -122,4 +122,86 @@ class ValidationTest extends \Codeception\Test\Unit
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
         });
     }
+
+    public function testAbsolutePathValidation()
+    {
+        $absolute = [
+            '//server/file',
+            '\\\\server\\file',
+            'C:/Users/',
+            'C:\\Users\\',
+        ];
+
+        foreach ($absolute as $path) {
+
+            codecept_debug($path);
+
+            $this->tester->assertEquals(
+                \Joppuyo\JpegXlEncode\Encoder::isAbsolutePath(
+                    $path,
+                    'Windows'
+                ),
+                true
+            );
+        }
+
+        $invalid = [
+            'C:cwd/another',
+            'C:cwd\\another',
+            'directory/directory',
+            'directory\\directory',
+        ];
+
+        foreach ($invalid as $path) {
+
+            codecept_debug($path);
+
+            $this->tester->assertEquals(
+                \Joppuyo\JpegXlEncode\Encoder::isAbsolutePath(
+                    $path,
+                    'Windows'
+                ),
+                false
+            );
+        }
+
+        $absolute = [
+            '/home/foo',
+            '/home/foo/..',
+        ];
+
+        foreach ($absolute as $path) {
+
+            codecept_debug($path);
+
+            $this->tester->assertEquals(
+                \Joppuyo\JpegXlEncode\Encoder::isAbsolutePath(
+                    $path,
+                    'Linux'
+                ),
+                true
+            );
+        }
+
+        $invalid = [
+            'C:cwd/another',
+            'C:cwd\\another',
+            'directory/directory',
+            'directory\\directory',
+        ];
+
+        foreach ($invalid as $path) {
+
+            codecept_debug($path);
+
+            $this->tester->assertEquals(
+                \Joppuyo\JpegXlEncode\Encoder::isAbsolutePath(
+                    $path,
+                    'Linux'
+                ),
+                false
+            );
+        }
+
+    }
 }
