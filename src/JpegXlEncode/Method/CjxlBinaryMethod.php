@@ -140,8 +140,8 @@ class CjxlBinaryMethod implements Method
             return '07bfb1902ef8eab8b5266ad884c2638fd17552a7e053ea0d65aa606cf7fcce48';
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static
-            return 'b78ec5a1b48c48c1e0dbb47865f7af8057a92291c65581a59e744a3dac6d5490';
+            // https://github.com/libjxl/libjxl/releases/tag/v0.6.1
+            return 'a27163889c9ee904890fc23102b7a4b6284ca265f15705282f031c71b2825bd0';
         }
     }
 
