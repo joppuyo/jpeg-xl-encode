@@ -30,7 +30,6 @@
         "symfony/process": "^5.3",
         "rosell-dk/image-mime-type-guesser": "^0.3.1",
         "respect/validation": "^2.0.17",
-        "jcupitt/vips": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -39,6 +38,6 @@
         "codeception/module-cli": "^1.1"
     },
     "suggest": {
-        "ext-vips": "Required for using the vips method"
+        "jcupitt/vips": "Required for using the vips method"
     }
 }
