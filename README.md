@@ -11,6 +11,7 @@ SPDX-License-Identifier: CC0-1.0
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![REUSE status](https://api.reuse.software/badge/github.com/joppuyo/jpeg-xl-encode)](https://api.reuse.software/info/github.com/joppuyo/jpeg-xl-encode)
+[![Active Development](https://img.shields.io/badge/Maintenance%20Level-Actively%20Developed-brightgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 
 A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
@@ -78,3 +79,7 @@ Default value is `true` for lossy and `false` for lossless.
 MIT.
 
 For detailed license information, see the individual file headers and [`.reuse/dep5`](.reuse/dep5).
+
+## Maintance level
+
+This project is under active development and it has a number of features currently under development.
