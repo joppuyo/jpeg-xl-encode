@@ -50,7 +50,7 @@ RUN cd /usr/local/src \
 	&& make \
 	&& make install
 
-RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig pecl install vips && docker-php-ext-enable vips
+RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig; pecl install vips && docker-php-ext-enable vips
 
 # Xdebug
 
