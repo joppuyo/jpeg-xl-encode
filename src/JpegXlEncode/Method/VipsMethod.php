@@ -5,7 +5,7 @@ namespace Joppuyo\JpegXlEncode\Method;
 use Jcupitt\Vips\Config;
 use Jcupitt\Vips\Image;
 
-class VipsMethod
+class VipsMethod implements Method
 {
     public static function isAvailable()
     {

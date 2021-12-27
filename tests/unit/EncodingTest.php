@@ -237,4 +237,68 @@ class EncodingTest extends \Codeception\Test\Unit
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
+
+    public function testNonAvailableMethod()
+    {
+        $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
+            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
+            \Joppuyo\JpegXlEncode\Encoder::encode(
+                $source,
+                $destination,
+                [
+                    '_methods' => ['dummy_not_available'],
+                ]
+            );
+        });
+    }
+
+    public function testNonAvailableMethodFallback()
+    {
+        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
+        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
+
+        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination,                 [
+            '_methods' => ['dummy_not_available', 'cjxl_binary'],
+        ]);
+        $this->assertEquals(md5_file($destination), md5_file($comparison_image));
+    }
+
+    public function testThrowsExceptionMethod()
+    {
+        $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
+            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
+            \Joppuyo\JpegXlEncode\Encoder::encode(
+                $source,
+                $destination,
+                [
+                    '_methods' => ['dummy_throws_exception'],
+                ]
+            );
+        });
+    }
+
+    public function testThrowsExceptionMethodFallback()
+    {
+        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
+        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+
+        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+
+        $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
+
+        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
+        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination,                 [
+            '_methods' => ['dummy_throws_exception', 'cjxl_binary'],
+        ]);
+        $this->assertEquals(md5_file($destination), md5_file($comparison_image));
+    }
 }

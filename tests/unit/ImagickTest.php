@@ -9,6 +9,9 @@ class ImagickTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
+        if (!\Joppuyo\JpegXlEncode\Method\ImagickMethod::isAvailable()) {
+            $this->markTestSkipped('Method not available');
+        }
         $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
         \Joppuyo\JpegXlEncode\Encoder::ensurePermissions($binary);
     }

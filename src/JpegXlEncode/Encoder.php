@@ -11,6 +11,11 @@ namespace Joppuyo\JpegXlEncode;
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
 use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
 use Joppuyo\JpegXlEncode\Exception\InvalidArgumentException;
+use Joppuyo\JpegXlEncode\Exception\MethodUnavailableException;
+use Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod;
+use Joppuyo\JpegXlEncode\Method\DummyThrowsExceptionMethod;
+use Joppuyo\JpegXlEncode\Method\ImagickMethod;
+use Joppuyo\JpegXlEncode\Method\VipsMethod;
 use Symfony\Component\Process\Process;
 use Respect\Validation\Validator as v;
 
@@ -41,9 +46,9 @@ class Encoder {
                 'progressive' => true,
             ],
             '_methods' => [
-                'cjxlBinary',
-                'vipsExtension',
-                'imagickExtension',
+                'cjxl_binary',
+                'vips',
+                'imagick',
             ],
         ];
 
@@ -92,36 +97,33 @@ class Encoder {
             $options['quality'] = 100;
         }
 
+        //self::debug($options);
+
         self::validateOptions($options);
 
-        $flags = [];
-        
-        if (!empty($options['quality']) && $options['encoding'] === 'lossy') {
-            array_push($flags, '--quality', $options['quality']);
+        $success = false;
+
+        foreach ($options['_methods'] as $methodName) {
+            try {
+                $methodClass = self::getClassForMethodName($methodName);
+                if (!$methodClass::isAvailable()) {
+                    throw new MethodUnavailableException();
+                }
+                // Try encoding using method
+                $methodClass::encode($source, $destination, $options);
+                $success = true;
+            } catch (\Exception $exception) {
+                // If failed, try next method
+                continue;
+            }
+            // If success, break out of look
+            break;
         }
 
-        if ($options['encoding'] === 'lossless') {
-            array_push($flags, '--modular');
+        if (!$success) {
+            // TODO: show better message from method
+            throw new \Exception('None of the methods succeeded');
         }
-
-        if (!empty($options['progressive']) && $options['progressive'] === true) {
-            array_push($flags, '--progressive');
-        }
-
-        $binary_path = self::getBinaryPath();
-        self::validateBinary($binary_path);
-        self::ensurePermissions($binary_path);
-
-        $process_parameters = array_merge([$binary_path, $source, $destination], $flags);
-
-        self::debug('process parameters', $process_parameters);
-
-        $process = new Process($process_parameters);
-
-        $process->run();
-
-        self::debug('process output', $process->getOutput());
-        self::debug('process error output', $process->getErrorOutput());
     }
 
     public static function getBinaryPath()
@@ -242,5 +244,30 @@ class Encoder {
             }
         }
         return false;
+    }
+
+    /**
+     * @param $methodName
+     * @return Method\Method
+     * @throws \Exception
+     */
+    private static function getClassForMethodName($methodName)
+    {
+        if ($methodName === 'cjxl_binary') {
+            return new CjxlBinaryMethod();
+        }
+        if ($methodName === 'imagick') {
+            return new ImagickMethod();
+        }
+        if ($methodName === 'vips') {
+            return new VipsMethod();
+        }
+        if ($methodName === 'dummy_not_available') {
+            return new DummyThrowsExceptionMethod();
+        }
+        if ($methodName === 'dummy_throws_exception') {
+            return new DummyThrowsExceptionMethod();
+        }
+        throw new \Exception("Could not find class for method $methodName");
     }
 }

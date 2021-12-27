@@ -5,6 +5,7 @@ namespace Joppuyo\JpegXlEncode\Method;
 use Jcupitt\Vips\Config;
 use Jcupitt\Vips\Image;
 use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
+use PHPUnit\Exception;
 use Symfony\Component\Process\Process;
 
 class CjxlBinaryMethod implements Method
@@ -16,8 +17,29 @@ class CjxlBinaryMethod implements Method
 
     public static function isAvailable()
     {
-        // TODO: maybe we call cjxl binary with -v or something, I dunno
-        return true;
+        if (!function_exists('proc_open')) {
+            return false;
+        }
+
+        try {
+            $binary_path = self::getBinaryPath();
+            self::validateBinary($binary_path);
+            self::ensurePermissions($binary_path);
+            $process = new Process([$binary_path, '--version']);
+            $process->run();
+
+            self::debug('result', $process->getOutput());
+
+            if (stripos($process->getOutput(), 'Copyright (c) the JPEG XL Project') !== false) {
+                return true;
+            }
+
+        } catch (\Exception $exception) {
+            self::debug('Ran into exception while executing cjxl binary', $exception);
+            return false;
+        }
+
+        return false;
     }
 
     public static function getSupportedFeatures()
@@ -132,6 +154,14 @@ class CjxlBinaryMethod implements Method
         $permissions = substr(sprintf('%o', fileperms($path)), -4);
         if ($permissions !== '0755') {
             chmod($path, 0755);
+        }
+    }
+
+    private static function debug(...$params) {
+        if (function_exists('codecept_debug')) {
+            foreach ($params as $param) {
+                codecept_debug($param);
+            }
         }
     }
 
