@@ -134,7 +134,7 @@ jobs:
 #      - uses: satackey/action-docker-layer-caching@v0.0.11
 #        continue-on-error: true
       - name: Setup docker
-        run: docker-compose up --file docker-compose-imagemagick.yml --build -d
+        run: docker-compose --file docker-compose-imagemagick.yml up --build -d
       - name: Validate composer.json and composer.lock
         run: docker exec -w /home/project jpeg-xl-encode_default_1 bash -c "composer validate"
       - name: Install dependencies
