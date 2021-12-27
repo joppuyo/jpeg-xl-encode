@@ -126,13 +126,13 @@ jobs:
           with:
             files: ./tests/_output/coverage.xml
             verbose: true
-  build-linux-imagemagick:
+  test-linux-imagemagick:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
       - run: docker-compose pull
-#      - uses: satackey/action-docker-layer-caching@v0.0.11
-#        continue-on-error: true
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
       - name: Setup docker
         run: docker-compose --file docker-compose-imagemagick.yml up --build -d
       - name: Validate composer.json and composer.lock
