@@ -23,6 +23,9 @@ class CjxlBinaryMethod implements Method
 
         try {
             $binary_path = self::getBinaryPath();
+
+            self::debug('binary path', $binary_path);
+
             self::validateBinary($binary_path);
             self::ensurePermissions($binary_path);
             $process = new Process([$binary_path, '--version']);
