@@ -74,6 +74,22 @@ Enabling progressive decoding for Modular images is not recommended since it mak
 
 Default value is `true` for lossy and `false` for lossless.
 
+## Methods
+
+There's 3 different methods you can use: cjxl binary, ImageMagick extension and Vips extension.
+
+### Cjxl binary
+
+This method executes the cjxl binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+
+### ImageMagick extension
+
+This method uses the ImageMagick library and it's PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice it means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time.
+
+### Vips extension
+
+This method uses the vips library and it's PHP extension. However, vips needs to be built with JXL support. In practice it means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time.
+
 ## License
 
 MIT.
