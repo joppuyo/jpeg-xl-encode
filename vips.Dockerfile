@@ -52,6 +52,8 @@ RUN cd /usr/local/src \
 
 RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig; pecl install vips && docker-php-ext-enable vips
 
+RUN php -m
+
 # Xdebug
 
 RUN apt-get clean
