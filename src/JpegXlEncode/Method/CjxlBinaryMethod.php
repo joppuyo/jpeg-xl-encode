@@ -4,7 +4,6 @@ namespace Joppuyo\JpegXlEncode\Method;
 
 use Jcupitt\Vips\Config;
 use Jcupitt\Vips\Image;
-use Joppuyo\JpegXlEncode\Encoder;
 use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
 use PHPUnit\Exception;
 use Symfony\Component\Process\Process;
@@ -105,12 +104,11 @@ class CjxlBinaryMethod implements Method
             return realpath(__DIR__ . '/../../../bin/cjxl-v0-5-0-macos-x64-static');
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            return realpath(__DIR__ . '/../../..bin/cjxl-v0-6-1-linux-x64-static');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-linux-x64-static');
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            return realpath(__DIR__ . '/../../..bin/cjxl-v0-5-0-windows-x64-static.exe');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-5-0-windows-x64-static.exe');
         }
-        Encoder::debug('Could not find binary suitable for the current operating system.');
         throw new \Exception('Could not find binary suitable for the current operating system.');
     }
 
