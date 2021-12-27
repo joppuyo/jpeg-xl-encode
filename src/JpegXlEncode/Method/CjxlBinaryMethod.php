@@ -35,7 +35,7 @@ class CjxlBinaryMethod implements Method
             }
 
         } catch (\Exception $exception) {
-            self::debug('Ran into exception while executing cjxl binary', $exception);
+            self::debug('Ran into exception while executing cjxl binary', $exception->getMessage());
             return false;
         }
 

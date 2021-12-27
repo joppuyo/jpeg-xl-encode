@@ -140,7 +140,7 @@ class Encoder {
         throw new \Exception('Could not find binary suitable for the current operating system.');
     }
 
-    private static function debug(...$params) {
+    public static function debug(...$params) {
         if (function_exists('codecept_debug')) {
             foreach ($params as $param) {
                 codecept_debug($param);
@@ -270,4 +270,5 @@ class Encoder {
         }
         throw new \Exception("Could not find class for method $methodName");
     }
+
 }
