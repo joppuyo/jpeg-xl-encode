@@ -84,11 +84,11 @@ This method executes the cjxl binary on the command line. It's the most compatib
 
 ### ImageMagick extension
 
-This method uses the ImageMagick library and it's PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice it means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time.
+This method uses the ImageMagick library and its PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice, this means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time.
 
 ### Vips extension
 
-This method uses the vips library and it's PHP extension. However, vips needs to be built with JXL support. In practice it means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time.
+This method uses the vips library and its PHP extension. However, vips needs to be built with JXL support. In practice, this means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time.
 
 ## License
 
