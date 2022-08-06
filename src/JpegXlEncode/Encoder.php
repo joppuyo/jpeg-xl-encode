@@ -6,21 +6,21 @@
 // SPDX-FileCopyrightText: Copyright (c) 2005-2008, eZ Systems A.S.
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace Joppuyo\JpegXlEncode;
+namespace NPX\JpegXlEncode;
 
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
-use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
-use Joppuyo\JpegXlEncode\Exception\InvalidArgumentException;
+use NPX\JpegXlEncode\Exception\BinaryValidationException;
+use NPX\JpegXlEncode\Exception\InvalidArgumentException;
+use NPX\JpegXlEncode\Exception\MethodUnavailableException;
+use NPX\JpegXlEncode\Method\CjxlBinaryMethod;
+use NPX\JpegXlEncode\Method\DummyThrowsExceptionMethod;
+use NPX\JpegXlEncode\Method\ImagickMethod;
+use NPX\JpegXlEncode\Method\VipsMethod;
 use Symfony\Component\Process\Process;
 use Respect\Validation\Validator as v;
 
 class Encoder {
-
-    /**
-     * @var bool
-     */
-    private static $binaryValidated = false;
-
+    
     /*
      * Convert a JPEG or PNG file to JPEG XL
      * @throws \Exception
@@ -39,7 +39,12 @@ class Encoder {
                 'encoding' => 'lossy', // VarDCT
                 'quality' => 85,
                 'progressive' => true,
-            ]
+            ],
+            '_methods' => [
+                'cjxl_binary',
+                'vips',
+                'imagick',
+            ],
         ];
 
         if (!self::isAbsolutePath($source)) {
@@ -87,73 +92,40 @@ class Encoder {
             $options['quality'] = 100;
         }
 
+        //self::debug($options);
+
         self::validateOptions($options);
 
-        $flags = [];
-        
-        if (!empty($options['quality']) && $options['encoding'] === 'lossy') {
-            array_push($flags, '--quality', $options['quality']);
+        $success = false;
+
+        foreach ($options['_methods'] as $methodName) {
+            try {
+                $methodClass = self::getClassForMethodName($methodName);
+                if (!$methodClass::isAvailable()) {
+                    throw new MethodUnavailableException();
+                }
+                // Try encoding using method
+                $methodClass::encode($source, $destination, $options);
+                $success = true;
+            } catch (\Exception $exception) {
+                // If failed, try next method
+                continue;
+            }
+            // If success, break out of look
+            break;
         }
 
-        if ($options['encoding'] === 'lossless') {
-            array_push($flags, '--modular');
+        if (!$success) {
+            // TODO: show better message from method
+            throw new \Exception('None of the methods succeeded');
         }
-
-        if (!empty($options['progressive']) && $options['progressive'] === true) {
-            array_push($flags, '--progressive');
-        }
-
-        $binary_path = self::getBinaryPath();
-        self::validateBinary($binary_path);
-        self::ensurePermissions($binary_path);
-
-        $process_parameters = array_merge([$binary_path, $source, $destination], $flags);
-
-        self::debug('process parameters', $process_parameters);
-
-        $process = new Process($process_parameters);
-
-        $process->run();
-
-        self::debug('process output', $process->getOutput());
-        self::debug('process error output', $process->getErrorOutput());
     }
 
-    public static function getBinaryPath()
-    {
-        if (PHP_OS_FAMILY === 'Darwin') {
-            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-macos-x64-static');
-        }
-        if (PHP_OS_FAMILY === 'Linux') {
-            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-linux-x64-static');
-        }
-        if (PHP_OS_FAMILY === 'Windows') {
-            return realpath(__DIR__ . '/../../bin/cjxl-v0-5-0-windows-x64-static.exe');
-        }
-        throw new \Exception('Could not find binary suitable for the current operating system.');
-    }
-
-    private static function debug(...$params) {
+    public static function debug(...$params) {
         if (function_exists('codecept_debug')) {
             foreach ($params as $param) {
                 codecept_debug($param);
             }
-        }
-    }
-
-    /**
-     * Make sure binary is executable
-     * @param string $path
-     */
-    public static function ensurePermissions($path)
-    {
-        if (PHP_OS_FAMILY === 'Windows') {
-            return;
-        }
-
-        $permissions = substr(sprintf('%o', fileperms($path)), -4);
-        if ($permissions !== '0755') {
-            chmod($path, 0755);
         }
     }
 
@@ -162,7 +134,8 @@ class Encoder {
         $optionValidator = v::key('quality', v::intType()->between(1, 100))
             ->key('effort', v::intType()->between(1, 9))
             ->key('progressive', v::boolType())
-            ->key('encoding', v::stringType()->in(['lossless', 'lossy']));
+            ->key('encoding', v::stringType()->in(['lossless', 'lossy']))
+            ->key('_methods', v::arrayType()->each(v::stringVal()));
 
         try {
             $optionValidator->check($options);
@@ -170,39 +143,6 @@ class Encoder {
             throw new InvalidArgumentException($exception->getMessage());
         }
 
-    }
-
-    private static function validateBinary($binaryPath) {
-        if(self::$binaryValidated) {
-            // We validate binary only once per request to improve performance
-            self::debug('Binary already validated.');
-            return;
-        }
-        self::debug("Binary hasn't been validated yet. Validating...");
-        $comparisonHash = self::getHash();
-        $binaryHash = hash_file('sha256', $binaryPath);
-        if(!hash_equals($binaryHash, $comparisonHash)) {
-            self::debug('Hash does not match.');
-            throw new BinaryValidationException("Binary hash check failed.");
-        }
-        self::debug('Binary hash matches. Caching result of hash comparison to speed up further conversions.');
-        self::$binaryValidated = true;
-    }
-
-    private static function getHash()
-    {
-        if (PHP_OS_FAMILY === 'Darwin') {
-            // https://github.com/joppuyo/jpeg-xl-static-mac/releases/tag/v0.5.0-static-2
-            return '292927130b4a83c639df6ba573916c2205234ca85f68a1e1357201e5b33b1904';
-        }
-        if (PHP_OS_FAMILY === 'Linux') {
-            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static-2
-            return '50715d6af73bf177113ec4d46c35036b6295eb9a1be7e434c1a8ebbe5a1b8bda';
-        }
-        if (PHP_OS_FAMILY === 'Windows') {
-            // https://github.com/joppuyo/jpeg-xl-static/releases/tag/v0.5.0-static
-            return 'b78ec5a1b48c48c1e0dbb47865f7af8057a92291c65581a59e744a3dac6d5490';
-        }
     }
 
     /**
@@ -213,9 +153,9 @@ class Encoder {
      * @param string $path
      * @return bool
      */
-    private static function isAbsolutePath($path)
+    public static function isAbsolutePath($path, $os = PHP_OS_FAMILY)
     {
-        if (PHP_OS_FAMILY === 'Windows') {
+        if ($os === 'Windows') {
             // Sanitize the paths to use the correct directory separator for the platform
             $path = strtr($path, '\\/', '\\\\');
 
@@ -238,4 +178,30 @@ class Encoder {
         }
         return false;
     }
+
+    /**
+     * @param $methodName
+     * @return Method\Method
+     * @throws \Exception
+     */
+    private static function getClassForMethodName($methodName)
+    {
+        if ($methodName === 'cjxl_binary') {
+            return new CjxlBinaryMethod();
+        }
+        if ($methodName === 'imagick') {
+            return new ImagickMethod();
+        }
+        if ($methodName === 'vips') {
+            return new VipsMethod();
+        }
+        if ($methodName === 'dummy_not_available') {
+            return new DummyThrowsExceptionMethod();
+        }
+        if ($methodName === 'dummy_throws_exception') {
+            return new DummyThrowsExceptionMethod();
+        }
+        throw new \Exception("Could not find class for method $methodName");
+    }
+
 }

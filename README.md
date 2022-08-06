@@ -11,14 +11,18 @@ SPDX-License-Identifier: CC0-1.0
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![Packagist License](https://img.shields.io/packagist/l/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![REUSE status](https://api.reuse.software/badge/github.com/joppuyo/jpeg-xl-encode)](https://api.reuse.software/info/github.com/joppuyo/jpeg-xl-encode)
+[![Active Development](https://img.shields.io/badge/Maintenance%20Level-Actively%20Developed-brightgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 
 A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
 ## Requirements
 
 * PHP 7.2.5 or later.
-* Linux, MacOS or Windows OS with x64 architecture.
-* The `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+* Linux, MacOS or Windows OS
+* One or more of the following methods of encoding JPEG XL images needs to be avaiable:
+  * The `proc_open` PHP function needs to be enabled so the library can execute the cjxl binary on the command line.
+  * The `vips` PHP extension is installed and enabled. VIPS image processing library must be compiled with jxl support
+  * The `imagick` PHP extension is installed and enabled. ImageMagick library needs to be compiled with jxl support
 
 ## Installation
 
@@ -36,7 +40,7 @@ $options = [
     'quality' => 80,
 ];
 try {
-    \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+    \NPX\JpegXlEncode\Encoder::encode($source, $destination, $options);
 } catch (Exception $exception) {
     error_log('Whoops, something went wrong.');
 }
@@ -73,8 +77,28 @@ Enabling progressive decoding for Modular images is not recommended since it mak
 
 Default value is `true` for lossy and `false` for lossless.
 
+## Methods
+
+There's 3 different methods you can use: cjxl binary, ImageMagick extension and Vips extension. The library goes through each of the available methods and tries to use them. If none of the methods are available, an exception will be thrown.
+
+### Cjxl binary
+
+This method executes the cjxl binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+
+### ImageMagick extension
+
+This method uses the ImageMagick library and its PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice, this means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time.
+
+### Vips extension
+
+This method uses the vips library and its PHP extension. However, vips needs to be built with JXL support. In practice, this means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time.
+
 ## License
 
 MIT.
 
 For detailed license information, see the individual file headers and [`.reuse/dep5`](.reuse/dep5).
+
+## Maintance level
+
+This project is under active development and it has a number of features currently under development.

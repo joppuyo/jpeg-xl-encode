@@ -1,11 +1,11 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 
-Files: tests/_data/broadway-tower-edit.jpg "tests/_data/broadway tower edit.jpg" "tests/_data/broadway tower edit.jpg"
+Files: tests/_data/broadway-tower-edit/*
 Copyright: The author is Newton2 (cropped by Yummifruitbat)
 License: CC-BY-2.5
 Comment: https://commons.wikimedia.org/wiki/File:Broadway_tower_edit.jpg
 
-Files: tests/_data/jpeg-xl-logo.png "tests/_data/folder with space/jpeg-xl-logo.png"
+Files: tests/_data/jpeg-xl-logo/*
 Copyright: Masahito TAKIZAWA
 License: CC-BY-ND-4.0
 Comment: https://jpeg.org/downloads/JPEG_logos_package.zip
