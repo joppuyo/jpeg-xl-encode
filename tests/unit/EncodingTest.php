@@ -12,8 +12,8 @@ class EncodingTest extends \Codeception\Test\Unit
     
     protected function _before()
     {
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
-        \Joppuyo\JpegXlEncode\Encoder::ensurePermissions($binary);
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
     }
 
     protected function _after()
@@ -26,7 +26,9 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+
+        codecept_debug("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
@@ -42,7 +44,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
 
@@ -56,7 +58,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
@@ -72,7 +74,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --modular --quality 100 --effort 7");
 
@@ -86,7 +88,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --quality 85 --effort 7 --progressive");
 
@@ -102,7 +104,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --quality 90 --effort 7 --progressive");
 
@@ -206,7 +208,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
@@ -225,7 +227,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
 
@@ -259,7 +261,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
@@ -291,7 +293,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 

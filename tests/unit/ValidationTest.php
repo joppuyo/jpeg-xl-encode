@@ -12,8 +12,8 @@ class ValidationTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        $binary = \Joppuyo\JpegXlEncode\Encoder::getBinaryPath();
-        \Joppuyo\JpegXlEncode\Encoder::ensurePermissions($binary);
+        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
     }
 
     protected function _after()
