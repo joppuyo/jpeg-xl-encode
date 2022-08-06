@@ -101,7 +101,7 @@ class CjxlBinaryMethod implements Method
     public static function getBinaryPath()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
-            return realpath(__DIR__ . '/../../../bin/cjxl-v0-5-0-macos-x64-static');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-macos-x64-static');
         }
         if (PHP_OS_FAMILY === 'Linux') {
             return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-linux-x64-static');
@@ -132,8 +132,8 @@ class CjxlBinaryMethod implements Method
     private static function getHash()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
-            // https://github.com/joppuyo/jpeg-xl-static-mac/releases/tag/v0.5.0-static-2
-            return '292927130b4a83c639df6ba573916c2205234ca85f68a1e1357201e5b33b1904';
+            // https://github.com/joppuyo/libjxl-0.6.1-mac-static/releases/tag/v0.6.1-mac
+            return 'c1eb7363fdad9ac16b8cac41ed79c8b4dad48608a22e8d4294308f6d0d1c8293';
         }
         if (PHP_OS_FAMILY === 'Linux') {
             // https://github.com/libjxl/libjxl/releases/tag/v0.6.1
