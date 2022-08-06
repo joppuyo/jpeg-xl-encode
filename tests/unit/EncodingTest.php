@@ -22,7 +22,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testDefaultSettingsJpeg()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
@@ -39,7 +39,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testDefaultSettingsPng()
     {
-        $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testDefaultSettingsPng.jxl';
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
@@ -69,7 +69,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testFolderWithSpace()
     {
-        $source = __DIR__ . '/../_data/folder with space/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/folder with space/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testDefaultSettingsPng.jxl';
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
@@ -84,7 +84,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testFilenameAndFolderWithSpace()
     {
-        $source = __DIR__ . '/../_data/folder with space/broadway tower edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/folder with space/broadway tower edit.jpg';
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
@@ -99,7 +99,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function test90SettingJpeg()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/test90SettingJpeg.jxl';
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
@@ -116,7 +116,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     /*public function testFormatOptionsOverrideDefaultOptions()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testFormatOptionsOverrideDefaultOptions.jxl';
         $result = __DIR__ . '/../_data/broadway-tower-edit-mac-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
         \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, [
@@ -176,25 +176,25 @@ class EncodingTest extends \Codeception\Test\Unit
     public function testRelativeDestination()
     {
         $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = 'testRelativePath.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
         $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = '_output/testRelativePath.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
         $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = './_output/testRelativePath.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
         $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = '../_output/testRelativePath.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
         });
@@ -202,7 +202,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testPngToLossy()
     {
-        $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testPngToLossy.jxl';
 
 
@@ -222,7 +222,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testCantSetQualityInModular()
     {
-        $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
         $destination = __DIR__ . '/../_output/testDefaultSettingsPng.jxl';
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
@@ -243,7 +243,7 @@ class EncodingTest extends \Codeception\Test\Unit
     public function testNonAvailableMethod()
     {
         $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode(
                 $source,
@@ -257,7 +257,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testNonAvailableMethodFallback()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
@@ -275,7 +275,7 @@ class EncodingTest extends \Codeception\Test\Unit
     public function testThrowsExceptionMethod()
     {
         $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
-            $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+            $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
             \Joppuyo\JpegXlEncode\Encoder::encode(
                 $source,
@@ -289,7 +289,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
     public function testThrowsExceptionMethodFallback()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 

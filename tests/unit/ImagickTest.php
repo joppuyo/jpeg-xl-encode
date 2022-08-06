@@ -1,5 +1,8 @@
 <?php
 
+// SPDX-FileCopyrightText: 2021 Johannes Siipola
+// SPDX-License-Identifier: MIT
+
 class ImagickTest extends \Codeception\Test\Unit
 {
     /**
@@ -22,7 +25,7 @@ class ImagickTest extends \Codeception\Test\Unit
 
     public function test90SettingJpeg()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/test90SettingJpegImagick.jxl';
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-imagick-quality-90-mode-vardct-effort-7-progressive-false.jxl';
@@ -44,7 +47,7 @@ class ImagickTest extends \Codeception\Test\Unit
 
     public function testDefaultSettingsPng()
     {
-        $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
 
         $destination = __DIR__ . '/../_output/testDefaultSettingsPngImagick.jxl';
 

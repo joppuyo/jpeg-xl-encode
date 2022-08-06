@@ -1,5 +1,8 @@
 <?php
 
+// SPDX-FileCopyrightText: 2021 Johannes Siipola
+// SPDX-License-Identifier: MIT
+
 class VipsTest extends \Codeception\Test\Unit
 {
     /**
@@ -22,7 +25,7 @@ class VipsTest extends \Codeception\Test\Unit
 
     public function test90SettingJpeg()
     {
-        $source = __DIR__ . '/../_data/broadway-tower-edit.jpg';
+        $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/test90SettingJpegVips.jxl';
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-false.jxl';

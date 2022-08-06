@@ -23,7 +23,7 @@ class ValidationTest extends \Codeception\Test\Unit
     public function testCantSetInvalidQuality()
     {
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'encoding' => 'lossy',
@@ -33,7 +33,7 @@ class ValidationTest extends \Codeception\Test\Unit
         });
 
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'encoding' => 'lossy',
@@ -43,7 +43,7 @@ class ValidationTest extends \Codeception\Test\Unit
         });
 
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'encoding' => 'lossy',
@@ -56,7 +56,7 @@ class ValidationTest extends \Codeception\Test\Unit
     public function testCantSetInvalidEncoding()
     {
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'encoding' => 'asdf',
@@ -68,7 +68,7 @@ class ValidationTest extends \Codeception\Test\Unit
     public function testCantSetInvalidProgressive()
     {
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'progressive' => 'asdf',
@@ -77,7 +77,7 @@ class ValidationTest extends \Codeception\Test\Unit
         });
 
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'progressive' => 1,
@@ -86,7 +86,7 @@ class ValidationTest extends \Codeception\Test\Unit
         });
 
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'progressive' => 123,
@@ -98,7 +98,7 @@ class ValidationTest extends \Codeception\Test\Unit
     public function testCantSetInvalidEffort()
     {
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'effort' => 'asdf',
@@ -106,7 +106,7 @@ class ValidationTest extends \Codeception\Test\Unit
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
         });
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'effort' => 10,
@@ -114,7 +114,7 @@ class ValidationTest extends \Codeception\Test\Unit
             \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
         });
         $this->tester->expectThrowable(\Joppuyo\JpegXlEncode\Exception\InvalidArgumentException::class, function () {
-            $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+            $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
             $destination = __DIR__ . '/../_output/testCantSetInvalidQuality.jxl';
             $options = [
                 'effort' => -1,
