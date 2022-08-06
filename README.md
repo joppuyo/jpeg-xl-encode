@@ -18,8 +18,11 @@ A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very muc
 ## Requirements
 
 * PHP 7.2.5 or later.
-* Linux, MacOS or Windows OS with x64 architecture.
-* The `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons. You can also build ImageMagick or Vips from the source with JPEG XL support and use the Imagick/Vips PHP extension to encode jxl files.
+* Linux, MacOS or Windows OS
+* One or more of the following methods of encoding JPEG XL images needs to be avaiable:
+  * The `proc_open` PHP function needs to be enabled so the library can execute the cjxl binary on the command line.
+  * The `vips` PHP extension is installed and enabled. VIPS image processing library must be compiled with jxl support
+  * The `imagick` PHP extension is installed and enabled. ImageMagick library needs to be compiled with jxl support
 
 ## Installation
 
