@@ -12,11 +12,11 @@ class ImagickTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        if (!\Joppuyo\JpegXlEncode\Method\ImagickMethod::isAvailable()) {
+        if (!\NPX\JpegXlEncode\Method\ImagickMethod::isAvailable()) {
             $this->markTestSkipped('Method not available');
         }
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
-        \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        \NPX\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
     }
 
     protected function _after()
@@ -32,7 +32,7 @@ class ImagickTest extends \Codeception\Test\Unit
 
         $this->tester->runShellCommand("convert -quality 90 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
 
-        \Joppuyo\JpegXlEncode\Method\ImagickMethod::encode(
+        \NPX\JpegXlEncode\Method\ImagickMethod::encode(
             $source,
             $destination,
             [
@@ -53,11 +53,11 @@ class ImagickTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-imagick-mode-modular-quality-100-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("convert -quality 90 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
 
-        \Joppuyo\JpegXlEncode\Method\ImagickMethod::encode(
+        \NPX\JpegXlEncode\Method\ImagickMethod::encode(
             $source,
             $destination,
             [

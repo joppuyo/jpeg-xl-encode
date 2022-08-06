@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: MIT
 
 
-namespace Joppuyo\JpegXlEncode\Exception;
+namespace NPX\JpegXlEncode\Exception;
 
 
 class MethodUnavailableException extends \Exception

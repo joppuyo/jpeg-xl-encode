@@ -12,8 +12,8 @@ class EncodingTest extends \Codeception\Test\Unit
     
     protected function _before()
     {
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
-        \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        \NPX\JpegXlEncode\Method\CjxlBinaryMethod::ensurePermissions($binary);
     }
 
     protected function _after()
@@ -26,14 +26,14 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         codecept_debug("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -44,11 +44,11 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
 
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -58,12 +58,12 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -74,11 +74,11 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --modular --quality 100 --effort 7");
 
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -88,12 +88,12 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -104,11 +104,11 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary \"$source\" \"$comparison_image\" --quality 90 --effort 7 --progressive");
 
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, [
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination, [
             'quality' => 90,
         ]);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
@@ -119,7 +119,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
         $destination = __DIR__ . '/../_output/testFormatOptionsOverrideDefaultOptions.jxl';
         $result = __DIR__ . '/../_data/broadway-tower-edit-mac-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, [
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination, [
             'quality' => 10,
             'lossy' => [
                 'quality' => 90,
@@ -133,7 +133,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $this->tester->expectThrowable(new \Exception('Invalid MIME type. Must be one of the following: image/jpeg, image/png.'), function () {
             $source = __DIR__ . '/../_data/text.txt';
             $destination = __DIR__ . '/../_output/testNonImageFile.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
     }
 
@@ -142,61 +142,61 @@ class EncodingTest extends \Codeception\Test\Unit
         $this->tester->expectThrowable(new \Exception('File does not exist.'), function () {
             $source = __DIR__ . '/../_data/asdfg.qwerty';
             $destination = __DIR__ . '/../_output/testNonExistingImageFile.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
     }
 
     public function testRelativeSource()
     {
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
             $source = 'text.txt';
             $destination = __DIR__ . '/../_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
             $source = '_data/text.txt';
             $destination = __DIR__ . '/../_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
             $source = './_data/text.txt';
             $destination = __DIR__ . '/../_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Source path must be an absolute path.'), function () {
             $source = '../_data/text.txt';
             $destination = __DIR__ . '/../_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
     }
 
     public function testRelativeDestination()
     {
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = 'testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = '_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = './_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
 
-        $this->tester->expectThrowable(new \Joppuyo\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
+        $this->tester->expectThrowable(new \NPX\JpegXlEncode\Exception\InvalidArgumentException('Destination path must be an absolute path.'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = '../_output/testRelativePath.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination);
+            \NPX\JpegXlEncode\Encoder::encode($source, $destination);
         });
     }
 
@@ -208,7 +208,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
@@ -216,7 +216,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $options = [
             'encoding' => 'lossy',
         ];
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination, $options);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -227,7 +227,7 @@ class EncodingTest extends \Codeception\Test\Unit
 
         $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --modular --quality 100 --effort 7");
 
@@ -236,7 +236,7 @@ class EncodingTest extends \Codeception\Test\Unit
             'quality' => 50,
         ];
 
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination, $options);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
     }
 
@@ -245,7 +245,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode(
+            \NPX\JpegXlEncode\Encoder::encode(
                 $source,
                 $destination,
                 [
@@ -261,12 +261,12 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination,                 [
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination,                 [
             '_methods' => ['dummy_not_available', 'cjxl_binary'],
         ]);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
@@ -277,7 +277,7 @@ class EncodingTest extends \Codeception\Test\Unit
         $this->tester->expectThrowable(new \Exception('None of the methods succeeded'), function () {
             $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
             $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
-            \Joppuyo\JpegXlEncode\Encoder::encode(
+            \NPX\JpegXlEncode\Encoder::encode(
                 $source,
                 $destination,
                 [
@@ -293,12 +293,12 @@ class EncodingTest extends \Codeception\Test\Unit
         $destination = __DIR__ . '/../_output/testDefaultSettingsJpeg.jxl';
         $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
 
-        $binary = \Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
+        $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive");
 
         $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true.jxl';
-        \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination,                 [
+        \NPX\JpegXlEncode\Encoder::encode($source, $destination,                 [
             '_methods' => ['dummy_throws_exception', 'cjxl_binary'],
         ]);
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));

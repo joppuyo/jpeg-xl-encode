@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021 Johannes Siipola
 // SPDX-License-Identifier: MIT
 
-namespace Joppuyo\JpegXlEncode\Method;
+namespace NPX\JpegXlEncode\Method;
 
 class DummyThrowsExceptionMethod implements Method
 {

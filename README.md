@@ -40,7 +40,7 @@ $options = [
     'quality' => 80,
 ];
 try {
-    \Joppuyo\JpegXlEncode\Encoder::encode($source, $destination, $options);
+    \NPX\JpegXlEncode\Encoder::encode($source, $destination, $options);
 } catch (Exception $exception) {
     error_log('Whoops, something went wrong.');
 }

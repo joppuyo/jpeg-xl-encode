@@ -3,11 +3,11 @@
 // SPDX-FileCopyrightText: 2021 Johannes Siipola
 // SPDX-License-Identifier: MIT
 
-namespace Joppuyo\JpegXlEncode\Method;
+namespace NPX\JpegXlEncode\Method;
 
 use Jcupitt\Vips\Config;
 use Jcupitt\Vips\Image;
-use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
+use NPX\JpegXlEncode\Exception\BinaryValidationException;
 use PHPUnit\Exception;
 use Symfony\Component\Process\Process;
 

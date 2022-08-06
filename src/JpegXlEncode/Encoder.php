@@ -6,16 +6,16 @@
 // SPDX-FileCopyrightText: Copyright (c) 2005-2008, eZ Systems A.S.
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace Joppuyo\JpegXlEncode;
+namespace NPX\JpegXlEncode;
 
 use ImageMimeTypeGuesser\ImageMimeTypeGuesser;
-use Joppuyo\JpegXlEncode\Exception\BinaryValidationException;
-use Joppuyo\JpegXlEncode\Exception\InvalidArgumentException;
-use Joppuyo\JpegXlEncode\Exception\MethodUnavailableException;
-use Joppuyo\JpegXlEncode\Method\CjxlBinaryMethod;
-use Joppuyo\JpegXlEncode\Method\DummyThrowsExceptionMethod;
-use Joppuyo\JpegXlEncode\Method\ImagickMethod;
-use Joppuyo\JpegXlEncode\Method\VipsMethod;
+use NPX\JpegXlEncode\Exception\BinaryValidationException;
+use NPX\JpegXlEncode\Exception\InvalidArgumentException;
+use NPX\JpegXlEncode\Exception\MethodUnavailableException;
+use NPX\JpegXlEncode\Method\CjxlBinaryMethod;
+use NPX\JpegXlEncode\Method\DummyThrowsExceptionMethod;
+use NPX\JpegXlEncode\Method\ImagickMethod;
+use NPX\JpegXlEncode\Method\VipsMethod;
 use Symfony\Component\Process\Process;
 use Respect\Validation\Validator as v;
 
