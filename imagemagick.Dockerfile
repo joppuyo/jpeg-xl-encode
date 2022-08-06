@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir -p /imagick-source \
     && cd /imagick-source \
-    && curl "https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-17.tar.gz" -o imagemagick.tar.gz \
+    && curl "https://imagemagick.org/archive/ImageMagick.tar.gz" -o imagemagick.tar.gz \
     && tar -xof imagemagick.tar.gz -C /imagick-source --strip-components=1 \
     && rm imagemagick.tar.gz* \
     && ./configure --with-jxl=yes \
