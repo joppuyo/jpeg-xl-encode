@@ -79,7 +79,7 @@ Default value is `true` for lossy and `false` for lossless.
 
 ## Methods
 
-There's 3 different methods you can use: cjxl binary, ImageMagick extension and Vips extension.
+There's 3 different methods you can use: cjxl binary, ImageMagick extension and Vips extension. The library goes through each of the available methods and tries to use them. If none of the methods are available, an exception will be thrown.
 
 ### Cjxl binary
 
