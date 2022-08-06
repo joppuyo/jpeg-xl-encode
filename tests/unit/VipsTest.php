@@ -48,7 +48,7 @@ class VipsTest extends \Codeception\Test\Unit
 
     public function testDefaultSettingsPng()
     {
-        $source = __DIR__ . '/../_data/jpeg-xl-logo.png';
+        $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
 
         $destination = __DIR__ . '/../_output/testDefaultSettingsPngVips.jxl';
 
