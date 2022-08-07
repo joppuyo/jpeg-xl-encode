@@ -96,7 +96,7 @@ This method uses the ImageMagick library and its PHP extension Imagick. However,
 
 This method uses the vips library and its PHP extension. However, vips needs to be built with JXL support. In practice, this means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time. For an example how to compile VIPS with JPEG XL support, see [this Dockerfile](https://github.com/joppuyo/jpeg-xl-encode/blob/main/vips.Dockerfile).
 
-In addition the vips extension, you will also need to install the vips PHP library in your project, you can do this by using the following command:
+In addition the vips extension, you will also need to install the vips PHP library in your project in addition to this one, you can do this by using the following command:
 
 ```
 composer require jcupitt/vips
