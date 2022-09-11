@@ -86,7 +86,7 @@ There's 3 different methods you can use: cjxl binary, ImageMagick extension and 
 
 ### Cjxl binary
 
-This method executes the cjxl binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+This method executes the `cjxl` binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the binary on the command line. Some web hosts may disable this function for security reasons.
 
 Note: this library comes bundled with statically compiled version of the `cjxl` binary for Linux, macOS and Windows systems. The binary is bundled with all the required libraries which means it will work out of the box without the need to install any additional dependencies.
 
