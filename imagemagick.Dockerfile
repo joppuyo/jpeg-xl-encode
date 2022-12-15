@@ -41,7 +41,7 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 RUN apt-get clean
 RUN apt-get update
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install xdebug-3.0.4 && docker-php-ext-enable xdebug
 
 # Composer
 
