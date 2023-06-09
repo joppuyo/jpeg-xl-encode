@@ -140,7 +140,7 @@ class CjxlBinaryMethod implements Method
     {
         if (PHP_OS_FAMILY === 'Darwin') {
             // https://github.com/joppuyo/libjxl-0.8.1-mac-static/releases/tag/v0.8.1-mac
-            return 'eaf40754912eb8ccbd8d0a1743b9eca14506c72c72ad0894e5914af9a8a6e0bf';
+            return '1096361e774f4f400c06e87df65821d0e8f8c8224007d85c0ad034a9051d8fe4';
         }
         if (PHP_OS_FAMILY === 'Linux') {
             // https://github.com/libjxl/libjxl/releases/tag/v0.8.1
