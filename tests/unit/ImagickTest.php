@@ -55,16 +55,11 @@ class ImagickTest extends \Codeception\Test\Unit
 
         $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
-        $this->tester->runShellCommand("convert -quality 90 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
+        $this->tester->runShellCommand("convert -quality 100 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
 
         \NPX\JpegXlEncode\Method\ImagickMethod::encode(
             $source,
-            $destination,
-            [
-                'encoding' => 'lossy',
-                'quality' => 90,
-                'effort' => 7,
-            ]
+            $destination
         );
 
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));

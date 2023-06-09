@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # JPEG XL Encode
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/joppuyo/jpeg-xl-encode/Test?label=tests&logo=github)](https://github.com/joppuyo/jpeg-xl-encode/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/joppuyo/jpeg-xl-encode/test.yml?branch=main&label=tests&logo=github)](https://github.com/joppuyo/jpeg-xl-encode/actions)
 [![Packagist Version](https://img.shields.io/packagist/v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
 [![codecov](https://codecov.io/gh/joppuyo/jpeg-xl-encode/branch/main/graph/badge.svg?token=KBTKSRNEG6)](https://codecov.io/gh/joppuyo/jpeg-xl-encode)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/joppuyo/jpeg-xl-encode)](https://packagist.org/packages/joppuyo/jpeg-xl-encode)
@@ -18,8 +18,8 @@ A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very muc
 ## Requirements
 
 * PHP 7.2.5 or later.
-* Linux, MacOS or Windows OS
-* One or more of the following methods of encoding JPEG XL images needs to be avaiable:
+* Linux, macOS or Windows OS
+* One or more of the following methods of encoding JPEG XL images needs to be available:
   * The `proc_open` PHP function needs to be enabled so the library can execute the cjxl binary on the command line.
   * The `vips` PHP extension is installed and enabled. VIPS image processing library must be compiled with jxl support
   * The `imagick` PHP extension is installed and enabled. ImageMagick library needs to be compiled with jxl support
@@ -33,6 +33,9 @@ composer require joppuyo/jpeg-xl-encode
 ## Usage
 
 ```php
+
+require __DIR__ . '/vendor/autoload.php';
+
 $source = '/absolute/path/to/source.jpeg';
 $destination = '/absolute/path/to/destination.jxl';
 $options = [
@@ -83,15 +86,23 @@ There's 3 different methods you can use: cjxl binary, ImageMagick extension and 
 
 ### Cjxl binary
 
-This method executes the cjxl binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the `cjxl` binary on the command line. Some web hosts may disable this function for security reasons.
+This method executes the `cjxl` binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the binary on the command line. Some web hosts may disable this function for security reasons.
+
+Note: this library comes bundled with statically compiled version of the `cjxl` binary for Linux, macOS and Windows systems. The binary is bundled with all the required libraries which means it will work out of the box without the need to install any additional dependencies.
 
 ### ImageMagick extension
 
-This method uses the ImageMagick library and its PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice, this means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time.
+This method uses the ImageMagick library and its PHP extension Imagick. However, ImageMagick needs to be built with JXL delegate. In practice, this means you will need to install the libjxl library on the server. Then you will need to build ImageMagick from the source with the option `--with-jxl=yes`. Lastly, you will need to install the Imagick PHP extension. The ImageMagick extension does not support progressive encoding at the time. For an example how to compile ImageMagick with JPEG XL support, see [this Dockerfile](https://github.com/joppuyo/jpeg-xl-encode/blob/main/imagemagick.Dockerfile).
 
 ### Vips extension
 
-This method uses the vips library and its PHP extension. However, vips needs to be built with JXL support. In practice, this means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time.
+This method uses the vips library and its PHP extension. However, vips needs to be built with JXL support. In practice, this means you will need to install the libjxl library on the server. Then you will need to build vips from the source. Lastly, you will need to install the vips PHP extension. The vips extension does not support progressive encoding at the time. For an example how to compile VIPS with JPEG XL support, see [this Dockerfile](https://github.com/joppuyo/jpeg-xl-encode/blob/main/vips.Dockerfile).
+
+In addition the vips extension, you will also need to install the `jcupitt/vips` PHP library in your project in addition `jpeg-xl-encode`, you can do this by using the following command:
+
+```
+composer require jcupitt/vips
+```
 
 ## License
 
