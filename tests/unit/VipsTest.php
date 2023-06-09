@@ -40,6 +40,9 @@ class VipsTest extends \Codeception\Test\Unit
             [
                 'encoding' => 'lossy',
                 'quality' => 90,
+                '_methods' => [
+                    'vips'
+                ]
             ]
         );
 
@@ -58,12 +61,15 @@ class VipsTest extends \Codeception\Test\Unit
 
         $this->tester->runShellCommand("vips jxlsave \"$source\" \"$comparison_image\" --lossless --effort=7");
 
-        \NPX\JpegXlEncode\Method\VipsMethod::encode(
+        \NPX\JpegXlEncode\Encoder::encode(
             $source,
             $destination,
             [
                 'encoding' => 'lossless',
                 'quality' => 100,
+                '_methods' => [
+                    'vips'
+                ]
             ]
         );
 

@@ -32,13 +32,14 @@ class ImagickTest extends \Codeception\Test\Unit
 
         $this->tester->runShellCommand("convert -quality 90 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
 
-        \NPX\JpegXlEncode\Method\ImagickMethod::encode(
+        \NPX\JpegXlEncode\Encoder::encode(
             $source,
             $destination,
             [
                 'encoding' => 'lossy',
                 'quality' => 90,
                 'effort' => 7,
+                '_methods' => ['imagick'],
             ]
         );
 
@@ -57,9 +58,14 @@ class ImagickTest extends \Codeception\Test\Unit
 
         $this->tester->runShellCommand("convert -quality 100 -set jxl:effort 7 \"$source\" \"$comparison_image\"");
 
-        \NPX\JpegXlEncode\Method\ImagickMethod::encode(
+        \NPX\JpegXlEncode\Encoder::encode(
             $source,
-            $destination
+            $destination,
+            [
+                '_methods' => [
+                    'imagick'
+                ]
+            ]
         );
 
         $this->assertEquals(md5_file($destination), md5_file($comparison_image));
