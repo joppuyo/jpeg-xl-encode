@@ -73,12 +73,16 @@ class CjxlBinaryMethod implements Method
     {
         $flags = [];
 
+        array_push($flags, '--lossless_jpeg=0');
+
         if (!empty($options['quality']) && $options['encoding'] === 'lossy') {
             array_push($flags, '--quality', $options['quality']);
+        } else {
+            array_push($flags, '--quality', 100);
         }
 
         if ($options['encoding'] === 'lossless') {
-            array_push($flags, '--modular');
+            array_push($flags, '--modular=1');
         }
 
         if (!empty($options['progressive']) && $options['progressive'] === true) {
@@ -104,13 +108,13 @@ class CjxlBinaryMethod implements Method
     public static function getBinaryPath()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
-            return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-macos-x64-static');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-8-1-macos-x64-static');
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-linux-x64-static');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-8-1-linux-x64-static');
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            return realpath(__DIR__ . '/../../../bin/cjxl-v0-6-1-windows-x64-static.exe');
+            return realpath(__DIR__ . '/../../../bin/cjxl-v0-8-1-windows-x64-static/cjxl.exe');
         }
         throw new \Exception('Could not find binary suitable for the current operating system.');
     }
@@ -135,16 +139,16 @@ class CjxlBinaryMethod implements Method
     private static function getHash()
     {
         if (PHP_OS_FAMILY === 'Darwin') {
-            // https://github.com/joppuyo/libjxl-0.6.1-mac-static/releases/tag/v0.6.1-mac
-            return 'c1eb7363fdad9ac16b8cac41ed79c8b4dad48608a22e8d4294308f6d0d1c8293';
+            // https://github.com/joppuyo/libjxl-0.8.1-mac-static/releases/tag/v0.8.1-mac
+            return 'eaf40754912eb8ccbd8d0a1743b9eca14506c72c72ad0894e5914af9a8a6e0bf';
         }
         if (PHP_OS_FAMILY === 'Linux') {
-            // https://github.com/libjxl/libjxl/releases/tag/v0.6.1
-            return '07bfb1902ef8eab8b5266ad884c2638fd17552a7e053ea0d65aa606cf7fcce48';
+            // https://github.com/libjxl/libjxl/releases/tag/v0.8.1
+            return 'bb0dd640f120771d699931935970333569673a5a83edd471ac07068285f5d6c1';
         }
         if (PHP_OS_FAMILY === 'Windows') {
-            // https://github.com/libjxl/libjxl/releases/tag/v0.6.1
-            return 'a27163889c9ee904890fc23102b7a4b6284ca265f15705282f031c71b2825bd0';
+            // https://github.com/libjxl/libjxl/releases/tag/v0.8.1
+            return '90291a0ccc3cbcc5626e45ff3ddc155d79469322384d710c70a41f917b45c2e8';
         }
     }
 
