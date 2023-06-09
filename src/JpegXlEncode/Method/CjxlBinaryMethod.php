@@ -75,10 +75,8 @@ class CjxlBinaryMethod implements Method
 
         array_push($flags, '--lossless_jpeg=0');
 
-        if (!empty($options['quality']) && $options['encoding'] === 'lossy') {
+        if (!empty($options['quality'])) {
             array_push($flags, '--quality', $options['quality']);
-        } else {
-            array_push($flags, '--quality', 100);
         }
 
         if ($options['encoding'] === 'lossless') {
