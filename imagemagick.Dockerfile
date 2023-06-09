@@ -12,7 +12,7 @@ ENV CC=clang
 ENV CXX=clang++
 
 WORKDIR /
-RUN git clone https://github.com/libjxl/libjxl.git --recursive && cd /libjxl && git reset --hard tags/v0.6.1 && ./deps.sh
+RUN git clone https://github.com/libjxl/libjxl.git --recursive && cd /libjxl && git reset --hard tags/v0.8.1 && ./deps.sh
 WORKDIR /libjxl/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF ..
 RUN cmake --build . -- -j$(nproc)
