@@ -13,6 +13,7 @@ use NPX\JpegXlEncode\Exception\BinaryValidationException;
 use NPX\JpegXlEncode\Exception\InvalidArgumentException;
 use NPX\JpegXlEncode\Exception\MethodUnavailableException;
 use NPX\JpegXlEncode\Method\CjxlBinaryMethod;
+use NPX\JpegXlEncode\Method\CjxlSystemBinaryMethod;
 use NPX\JpegXlEncode\Method\DummyThrowsExceptionMethod;
 use NPX\JpegXlEncode\Method\ImagickMethod;
 use NPX\JpegXlEncode\Method\VipsMethod;
@@ -42,6 +43,7 @@ class Encoder {
             ],
             '_methods' => [
                 'cjxl_binary',
+                'cjxl_system_binary',
                 'vips',
                 'imagick',
             ],
@@ -188,6 +190,9 @@ class Encoder {
     {
         if ($methodName === 'cjxl_binary') {
             return new CjxlBinaryMethod();
+        }
+        if ($methodName === 'cjxl_system_binary') {
+            return new CjxlSystemBinaryMethod();
         }
         if ($methodName === 'imagick') {
             return new ImagickMethod();
