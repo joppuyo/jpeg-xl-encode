@@ -28,14 +28,20 @@ class CjxlSystemBinaryMethod implements Method
 
             self::debug('result', $process->getOutput());
 
-            if (stripos($process->getOutput(), 'Copyright (c) the JPEG XL Project') !== false) {
-                return true;
+            if (stripos($process->getOutput(), 'Copyright (c) the JPEG XL Project') === false) {
+                return false;
             }
 
-            $version = preg_match("/cjxl v(\d.\d.\d)/", $process->getOutput());
+            preg_match("/cjxl v(\d.\d.\d)/", $process->getOutput(), $matches);
+
+            $version = '';
+
+            if (!empty($matches) && !empty($matches[0]) && !empty($matches[1])) {
+                $version = $matches[1];
+            }
 
             if (
-                version_compare($version, '0.8.1', '>=') &&
+                version_compare($version, '0.8.0', '>=') &&
                 version_compare($version, '0.9.0', '<')
             ) {
                 return true;
