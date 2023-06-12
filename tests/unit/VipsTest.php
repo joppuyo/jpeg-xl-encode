@@ -59,7 +59,7 @@ class VipsTest extends \Codeception\Test\Unit
 
         $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
-        $this->tester->runShellCommand("vips jxlsave \"$source\" \"$comparison_image\" --lossless --effort=7");
+        $this->tester->runShellCommand("vips jxlsave \"$source\" \"$comparison_image\" --Q 100 --lossless --effort=7");
 
         \NPX\JpegXlEncode\Encoder::encode(
             $source,
