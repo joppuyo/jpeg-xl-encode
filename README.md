@@ -82,13 +82,17 @@ Default value is `true` for lossy and `false` for lossless.
 
 ## Methods
 
-There's 3 different methods you can use: cjxl binary, ImageMagick extension and Vips extension. The library goes through each of the available methods and tries to use them. If none of the methods are available, an exception will be thrown.
+There are four different methods you can use: cjxl binary, cjxl system binary, ImageMagick extension and Vips extension. The library goes through each of the available methods and tries to use them. If none of the methods are available, an exception will be thrown.
 
 ### Cjxl binary
 
 This method executes the `cjxl` binary on the command line. It's the most compatible method and it supports the most features. However, the `proc_open` function needs to be enabled in the PHP installation since the library executes the binary on the command line. Some web hosts may disable this function for security reasons.
 
 Note: this library comes bundled with statically compiled version of the `cjxl` binary for Linux, macOS and Windows systems. The binary is bundled with all the required libraries which means it will work out of the box without the need to install any additional dependencies.
+
+### Cjxl system binary
+
+This is the same as the previous method but it executes the `cjxl` binary from system PATH. This means you need to install jpeg xl using your system package manager like homebrew or build jpeg xl from source and add the `cjxl` binary to your PATH variable.
 
 ### ImageMagick extension
 
