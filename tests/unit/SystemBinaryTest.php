@@ -25,8 +25,8 @@ class SystemBinaryTest extends \Codeception\Test\Unit
     public function testDefaultSettingsJpeg()
     {
         $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
-        $destination = __DIR__ . '/../_output/testDefaultSettingsJpegSystem.jxl';
-        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system.jxl';
+        $destination = __DIR__ . '/../_output/testDefaultSettingsJpegSystem2.jxl';
+        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system2.jxl';
 
         $binary = \NPX\JpegXlEncode\Method\CjxlSystemBinaryMethod::getBinaryPath();
 
@@ -34,7 +34,7 @@ class SystemBinaryTest extends \Codeception\Test\Unit
 
         $this->tester->runShellCommand("$binary $source $comparison_image --quality 85 --effort 7 --progressive --lossless_jpeg=0");
 
-        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system.jxl';
+        $result = __DIR__ . '/../_data/broadway-tower-edit-linux-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system2.jxl';
         \NPX\JpegXlEncode\Encoder::encode($source, $destination,
         [
             '_methods' => ['cjxl_system_binary']
@@ -45,9 +45,9 @@ class SystemBinaryTest extends \Codeception\Test\Unit
     public function testDefaultSettingsPng()
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
-        $destination = __DIR__ . '/../_output/testDefaultSettingsPngSystem.jxl';
+        $destination = __DIR__ . '/../_output/testDefaultSettingsPngSystem2.jxl';
 
-        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false-system.jxl';
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-v0-5-0-mode-modular-quality-100-effort-7-progressive-false-system2.jxl';
 
         $binary = \NPX\JpegXlEncode\Method\CjxlSystemBinaryMethod::getBinaryPath();
 
@@ -62,9 +62,9 @@ class SystemBinaryTest extends \Codeception\Test\Unit
     public function test90SettingJpeg()
     {
         $source = __DIR__ . '/../_data/broadway-tower-edit/broadway-tower-edit.jpg';
-        $destination = __DIR__ . '/../_output/test90SettingJpegSystem.jxl';
+        $destination = __DIR__ . '/../_output/test90SettingJpegSystem2.jxl';
 
-        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true-system.jxl';
+        $comparison_image = __DIR__ . '/../_output/broadway-tower-edit-linux-v0-5-0-quality-90-mode-vardct-effort-7-progressive-true-system2.jxl';
 
         $binary = \NPX\JpegXlEncode\Method\CjxlSystemBinaryMethod::getBinaryPath();
 
@@ -98,10 +98,10 @@ class SystemBinaryTest extends \Codeception\Test\Unit
     public function testPngToLossy()
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
-        $destination = __DIR__ . '/../_output/testPngToLossySystem.jxl';
+        $destination = __DIR__ . '/../_output/testPngToLossySystem2.jxl';
 
 
-        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system.jxl';
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-quality-85-mode-vardct-effort-7-progressive-true-system2.jxl';
 
         $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
@@ -119,9 +119,9 @@ class SystemBinaryTest extends \Codeception\Test\Unit
     public function testCantSetQualityInModular()
     {
         $source = __DIR__ . '/../_data/jpeg-xl-logo/jpeg-xl-logo.png';
-        $destination = __DIR__ . '/../_output/testDefaultSettingsPngSystem.jxl';
+        $destination = __DIR__ . '/../_output/testDefaultSettingsPngSystem2.jxl';
 
-        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false-system.jxl';
+        $comparison_image = __DIR__ . '/../_output/jpeg-xl-logo-mac-v0-5-0-mode-modular-effort-7-progressive-false-system2.jxl';
 
         $binary = \NPX\JpegXlEncode\Method\CjxlBinaryMethod::getBinaryPath();
 
