@@ -12,8 +12,6 @@ class DummyThrowsExceptionMethod implements Method
         return true;
     }
 
-    public static function getSupportedFeatures(){}
-
     public static function encode(string $source, string $destination, array $options = [])
     {
         throw new \Exception('Something went wrong');

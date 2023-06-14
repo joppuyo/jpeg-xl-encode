@@ -54,28 +54,6 @@ class CjxlSystemBinaryMethod implements Method
 
         return false;
     }
-
-    public static function getSupportedFeatures()
-    {
-        return [
-            'encoding' => ['lossy', 'lossless'],
-            'lossy' => [
-                'effort' => range(1, 9),
-                'quality' => range(1, 99), //TODO: maybe test if 100% quality differs from modular?
-                'progressive' => [true, false],
-            ],
-            'lossless' => [
-                'effort' => range(1, 9),
-                'quality' => [100],
-                'progressive' => [true, false],
-            ]
-        ];
-    }
-
-    public static function supportsConfig($config)
-    {
-    }
-
     public static function encode(string $source, string $destination, array $options = [])
     {
         $flags = [];

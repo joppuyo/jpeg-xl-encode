@@ -12,8 +12,6 @@ class DummyNotAvailableMethod implements Method
         return false;
     }
 
-    public static function getSupportedFeatures(){}
-
     public static function encode(string $source, string $destination, array $options = [])
     {
         // Don't do anything

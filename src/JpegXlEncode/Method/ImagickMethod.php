@@ -22,28 +22,6 @@ class ImagickMethod implements Method
         }
         return true;
     }
-
-    public static function getSupportedFeatures()
-    {
-        return [
-            'encoding' => ['lossy', 'lossless'],
-            'lossy' => [
-                'effort' => range(1, 9),
-                'quality' => range(1, 99),
-                'progressive' => [false],
-            ],
-            'lossless' => [
-                'effort' => range(1, 9),
-                'quality' => [100],
-                'progressive' => [false],
-            ]
-        ];
-    }
-
-    public static function supportsConfig($config)
-    {
-    }
-
     public static function encode(string $source, string $destination, array $options = [])
     {
 
