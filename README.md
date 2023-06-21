@@ -15,6 +15,8 @@ SPDX-License-Identifier: CC0-1.0
 
 A PHP library for encoding JPEG XL images. Supports JPEG and PNG input. Very much inspired by the excellent [WebP Convert](https://github.com/rosell-dk/webp-convert) library.
 
+It is intended as a plug-and-play solution that covers the most common use cases and it can be used in a wide variety of PHP projects.
+
 ## Requirements
 
 * PHP 7.2.5 or later.
